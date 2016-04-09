@@ -1,0 +1,16 @@
+<main layout="column">
+	<div></div>
+	<h1>MovieApp</h1>
+	<h2>
+		built with Angular 2, Angular Material <span>&</span> TypeScript<br>
+		powered by Firebase
+	</h2>
+	<h3>
+		<span *ngIf="!isReg() && !isAuth()" class="link" (click)="navigateTo(routes.register.component)">
+			{{ routes.register.text }}
+		</span>
+		<span *ngIf="!isReg() && !isAuth()">or</span>
+		<span *ngIf="!isAuth()" class="link" (click)="navigateTo(routes.signin.component)">{{ routes.signin.text }}</span>
+		<span *ngIf="!isAuth()">to proceed</span>
+	</h3>
+</main>
