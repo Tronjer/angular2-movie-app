@@ -1,7 +1,7 @@
 <md-card>
 	<md-card-title>
 		<md-card-title-text layout-padding>
-			<span class="md-headline">{{ movie?.title }}</span>
+			<input type="text" class="md-headline" [(ngModel)]="movie && movie.title">
 			<ul class="list-unstyled list-inline">
 				<li class="md-caption list-inline-item">{{ movie?.runtime }} min <span class="delimiter">|</span></li>
 				<li class="list-inline-item">
@@ -25,14 +25,14 @@
 					{{ actor }}<span *ngIf="!last">,</span>
 				</li>
 			</ul>
-			<p>
-				<span class="md-caption">Plot:</span><br>
-				<span class="md-body-1">{{ movie?.plot }}</span>
-			</p>
-			<p>
-				<span class="md-caption">Critics Consensus:</span><br>
+			<div layout="column">
+				<span class="md-caption edit-field">Plot:</span>
+				<textarea [(ngModel)]="movie && movie.plot"></textarea>
+			</div>
+			<div layout="column" class="edit-field">
+				<span class="md-caption">Critics Consensus:</span>
 				<span class="md-body-1">{{ movie?.tomato?.consensus || 'There is no concensus for this movie' }}</span>
-			</p>
+			</div>
 			<div class="rating">
 				<p class="md-caption">Rating:</p>
 				<div layout="row" layout-align="start center">
@@ -50,7 +50,7 @@
 		</md-card-title-media>
 	</md-card-title>
 	<md-card-actions layout="row" layout-align="end center">
-		<button md-button class="md-warn">Delete Movie</button>
-		<button md-button class="md-primary" (click)="onSelectEdit()">Edit Movie</button>
+		<button md-button class="md-warn" (click)="onCancel()">Cancel</button>
+		<button md-button class="md-primary" (click)="onSave()">Save Changes</button>
 	</md-card-actions>
 </md-card>

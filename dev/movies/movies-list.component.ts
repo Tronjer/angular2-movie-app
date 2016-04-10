@@ -4,6 +4,7 @@ import {AuthRouterOutlet} from "../shared/directives/auth-router-outlet.directiv
 import {MovieDetailsComponent} from "./movie-details.component";
 import {DataService} from "../shared/services/data.service";
 import {MATERIAL_DIRECTIVES, SidenavService} from "ng2-material/all";
+import {MovieEditComponent} from "./movie-edit.component";
 
 @Component({
     selector: 'movies-list',
@@ -15,6 +16,8 @@ import {MATERIAL_DIRECTIVES, SidenavService} from "ng2-material/all";
 
 @RouteConfig([
     { path: '/', name: 'MovieDetails', component: MovieDetailsComponent, useAsDefault: true },
+    { path: '/:index', name: 'MovieDetails', component: MovieDetailsComponent },
+    { path: '/:index/:edit', name: 'MovieEdit', component: MovieEditComponent }
 ])
 
 

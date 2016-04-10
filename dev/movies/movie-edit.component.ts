@@ -1,33 +1,35 @@
 import {Component, OnInit} from "angular2/core";
-import {MATERIAL_DIRECTIVES} from "ng2-material/all";
 import {DataService} from "../shared/services/data.service";
 import {RouteParams, Router} from "angular2/router";
 
 @Component({
-    selector: 'movie-details',
-    templateUrl: 'app/movies/movie-details.template.html',
-    styleUrls: ['app/movies//movies.styles.css'],
-    directives: [MATERIAL_DIRECTIVES]
+    selector: 'movie-edit',
+    templateUrl: 'app/movies/movie-edit.template.html',
+    styleUrls: ['app/movies/movies.styles.css'],
 })
 
-export class MovieDetailsComponent implements OnInit {
+export class MovieEditComponent implements OnInit {
     movie: any;
     private _index = Number(this._routeParams.get('index'));
-    private _edit: string = 'edit';
+    private _edit = Number(this._routeParams.get('edit'));
 
     constructor(private _dataService: DataService, private _routeParams: RouteParams, private _router: Router) {}
+
 
     ngOnInit():any {
         return this._dataService.getSingleData(this._index).subscribe(
             data => {
-                this.movie = data,
-                    console.log(' this.movie',  this.movie)
+                this.movie = data
             },
             error => console.log(error)
         );
     }
 
-    onSelectEdit() {
-        this._router.navigate(['MovieEdit', { index: this._index, edit: this._edit }]);
+    onSave() {
+        console.log(' new obj: ',  this.movie)
+    }
+
+    onCancel() {
+        window.history.back();
     }
 }

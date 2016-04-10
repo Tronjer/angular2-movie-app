@@ -14,6 +14,27 @@ md-list {
 
 md-card {
 
+  textarea, input {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5rem;
+  }
+
+  input {
+    margin: 0 1rem 0rem 0rem;
+  }
+
+  textarea {
+
+    min-height: 3rem;
+    margin: 0.4rem 1rem 0rem 0rem;
+
+  }
+
+  .edit-field {
+    margin-top: 1rem;
+  }
+
   md-card-title {
     margin-bottom: 0;
     padding-bottom: 0;
