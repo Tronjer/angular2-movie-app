@@ -20,8 +20,14 @@ export class MovieDetailsComponent implements OnInit {
     ngOnInit():any {
         return this._dataService.getSingleData(this._index).subscribe(
             data => {
-                this.movie = data,
-                    console.log(' this.movie',  this.movie)
+                    if (data === null ) {
+                        console.log('oops');
+                        this._router.navigate(['ErrorPage'])
+                    } else {
+                        this.movie = data;
+                    }
+                //this.movie = data
+                   // console.log(' this.movie',  this.movie)
             },
             error => console.log(error)
         );
@@ -29,5 +35,14 @@ export class MovieDetailsComponent implements OnInit {
 
     onSelectEdit() {
         this._router.navigate(['MovieEdit', { index: this._index, edit: this._edit }]);
+    }
+
+    onDelete() {
+
+        return this._dataService.deleteDataSet(this._index).subscribe(
+            () =>  this._router.navigate(['MovieDetails', { index: this._index + 1 }])
+
+
+        );
     }
 }

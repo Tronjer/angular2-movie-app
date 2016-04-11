@@ -5,6 +5,7 @@ import {MovieDetailsComponent} from "./movie-details.component";
 import {DataService} from "../shared/services/data.service";
 import {MATERIAL_DIRECTIVES, SidenavService} from "ng2-material/all";
 import {MovieEditComponent} from "./movie-edit.component";
+import {MovieErrorPageComponent} from "./movie-error-page.component";
 
 @Component({
     selector: 'movies-list',
@@ -16,6 +17,7 @@ import {MovieEditComponent} from "./movie-edit.component";
 
 @RouteConfig([
     { path: '/', name: 'MovieDetails', component: MovieDetailsComponent, useAsDefault: true },
+    { path: '/error', name: 'ErrorPage', component: MovieErrorPageComponent },
     { path: '/:index', name: 'MovieDetails', component: MovieDetailsComponent },
     { path: '/:index/:edit', name: 'MovieEdit', component: MovieEditComponent }
 ])
@@ -34,6 +36,7 @@ export class MoviesListComponent implements OnInit {
 
        return this._dataService.getAllData().subscribe(
             data => {
+                console.log(data),
                 this.movies = data
             },
             error => {

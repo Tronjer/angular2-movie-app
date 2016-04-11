@@ -31,6 +31,7 @@ export class DataService {
 
         this._dataUpdated.emit(null);
         return this._http.put(uri + this._token, body, { headers: headers })
+            .map(response => response.json());
     }
 
     addData(data: any): Observable<any> {
@@ -44,8 +45,10 @@ export class DataService {
 
     }
 
-    deleteAllData(): Observable<any> {
-        return this._http.delete(this._url + this._token)
+    deleteDataSet(index: any): Observable<any> {
+        const uri = 'https://ang2-example-app.firebaseio.com/movies/' + index + '.json';
+
+        return this._http.delete(uri + this._token)
             .map(response => response.json());
     }
 
