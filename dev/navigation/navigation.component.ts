@@ -2,12 +2,11 @@ import {Component} from "angular2/core";
 import {ROUTER_DIRECTIVES} from "angular2/router";
 import {AuthService} from "../shared/services/auth.service";
 import {MATERIAL_DIRECTIVES} from "ng2-material/all";
-import {MoviesListComponent} from "../movies/movies-list.component";
 
 @Component({
     selector: 'navigation',
     templateUrl: 'app/navigation/navigation.template.html',
-    directives: [ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES, MoviesListComponent]
+    directives: [ROUTER_DIRECTIVES, MATERIAL_DIRECTIVES]
 })
 
 export class NavigationComponent {

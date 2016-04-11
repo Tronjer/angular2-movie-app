@@ -1,17 +1,17 @@
 import {Component, OnInit} from "angular2/core";
 import {DataService} from "../shared/services/data.service";
-import {RouteParams, Router} from "angular2/router";
+import {RouteParams, Router, ROUTER_DIRECTIVES} from "angular2/router";
 
 @Component({
     selector: 'movie-edit',
     templateUrl: 'app/movies/movie-edit.template.html',
     styleUrls: ['app/movies/movies.styles.css'],
+    directives: [ROUTER_DIRECTIVES]
 })
 
 export class MovieEditComponent implements OnInit {
     movie: any;
     private _index = Number(this._routeParams.get('index'));
-    private _edit = Number(this._routeParams.get('edit'));
 
     constructor(private _dataService: DataService, private _routeParams: RouteParams, private _router: Router) {}
 
@@ -26,10 +26,15 @@ export class MovieEditComponent implements OnInit {
     }
 
     onSave() {
-        console.log(' new obj: ',  this.movie)
+        this._dataService.updateData(this._index, this.movie).subscribe(
+            data => {
+                console.log(data); this._router.navigate(['MovieDetails', { index: this._index }]);
+            },
+            error => console.log(error)
+        )
     }
 
     onCancel() {
-        window.history.back();
+        this._router.navigate(['MovieDetails', { index: this._index }]);
     }
 }
