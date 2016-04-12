@@ -7,7 +7,7 @@
 		</md-toolbar>
 		<md-list role="list">
 			<md-list-item md-ink role="listitem" *ngFor="#item of movies; #i = index"
-			              [ngClass]="{ active: selectedMovie == i }" (click)="onSelect(i)">
+			              [ngClass]="{ active: selectedMovie == i }" (click)="onSelect(i, item.slug)">
 				{{ item.title }}
 			</md-list-item>
 		</md-list>

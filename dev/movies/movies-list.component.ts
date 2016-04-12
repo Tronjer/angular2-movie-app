@@ -18,26 +18,29 @@ import {MovieErrorPageComponent} from "./movie-error-page.component";
 @RouteConfig([
     { path: '/', name: 'MovieDetails', component: MovieDetailsComponent, useAsDefault: true },
     { path: '/error', name: 'ErrorPage', component: MovieErrorPageComponent },
-    { path: '/:index', name: 'MovieDetails', component: MovieDetailsComponent },
-    { path: '/:index/:edit', name: 'MovieEdit', component: MovieEditComponent }
+    { path: '/:slug', name: 'MovieDetails', component: MovieDetailsComponent },
+    { path: '/:slug/:edit', name: 'MovieEdit', component: MovieEditComponent }
 ])
 
 
 
 export class MoviesListComponent implements OnInit {
-    movies: any;
+    movies: any = [];
     selectedMovie: any;
 
     constructor(private _dataService: DataService, private _router: Router, public sidenav: SidenavService) {}
 
-
     ngOnInit():any {
         this.selectedMovie = 0;
 
-       return this._dataService.getAllData().subscribe(
+        return this._dataService.getAllData().subscribe(
             data => {
-                console.log(data),
-                this.movies = data
+                for (var key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        this.movies.push(data[key]);
+                    }
+                }
+                return this.movies;
             },
             error => {
                 console.log('error: ', error);
@@ -48,9 +51,11 @@ export class MoviesListComponent implements OnInit {
         this.sidenav.show('left');
     }
 
-    onSelect(index: string) {
+    onSelect(index: string, slug: string) {
+        console.log('index', index);
+        console.log('slug', slug);
         this.selectedMovie = index;
         this.sidenav.hide('left');
-        this._router.navigate(['MovieDetails', {index: index}]);
+        this._router.navigate(['MovieDetails', {slug: slug}]);
     }
 }

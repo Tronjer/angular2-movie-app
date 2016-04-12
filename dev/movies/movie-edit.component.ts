@@ -12,29 +12,31 @@ import {RouteParams, Router, ROUTER_DIRECTIVES} from "angular2/router";
 export class MovieEditComponent implements OnInit {
     movie: any;
     private _index = Number(this._routeParams.get('index'));
+    private _slug = this._routeParams.get('slug');
 
     constructor(private _dataService: DataService, private _routeParams: RouteParams, private _router: Router) {}
 
 
     ngOnInit():any {
-        return this._dataService.getSingleData(this._index).subscribe(
+        return this._dataService.getSingleData(this._slug).subscribe(
             data => {
-                this.movie = data
+                this.movie = data,
+                    console.log('edit', this.movie)
             },
             error => console.log(error)
         );
     }
 
     onSave() {
-        this._dataService.updateData(this._index, this.movie).subscribe(
+        this._dataService.updateData(this._slug, this.movie).subscribe(
             data => {
-                console.log(data); this._router.navigate(['MovieDetails', { index: this._index }]);
+               this._router.navigate(['MovieDetails', { slug: this._slug }]);
             },
             error => console.log(error)
         )
     }
 
     onCancel() {
-        this._router.navigate(['MovieDetails', { index: this._index }]);
+        this._router.navigate(['MovieDetails', { slug: this._slug }]);
     }
 }

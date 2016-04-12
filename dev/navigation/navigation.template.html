@@ -4,7 +4,7 @@
 			<a md-button [routerLink]="['Start']">Home</a>
 			<a *ngIf="!isReg() && !isAuth()" md-button [routerLink]="['Registration']">Register</a>
 			<a *ngIf="!isAuth()" md-button [routerLink]="['Login']">Login</a>
-			<a *ngIf="isAuth()" md-button [routerLink]="['MoviesList']">Movies</a>
+			<a *ngIf="isAuth()" md-button href="/movies/a-million-ways-to-die">Movies</a>
 			<span flex></span>
 			<button *ngIf="isAuth()" (click)="logout()" md-button class="md-icon-button" aria-label="Sign Out">
 				<i md-icon>power_settings_new</i>

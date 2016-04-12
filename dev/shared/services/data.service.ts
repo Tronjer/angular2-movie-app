@@ -17,15 +17,15 @@ export class DataService {
             .map(response => response.json());
     }
 
-    getSingleData(index: any): Observable<any> {
-        const uri = 'https://ang2-example-app.firebaseio.com/movies/' + index + '.json';
+    getSingleData(slug: any): Observable<any> {
+        const uri = 'https://ang2-example-app.firebaseio.com/movies/' + slug + '.json';
 
         return this._http.get(uri + this._token)
             .map(response => response.json());
     }
 
-    updateData(index: any, data: any): Observable<any> {
-        const uri = 'https://ang2-example-app.firebaseio.com/movies/' + index + '.json';
+    updateData(slug: any, data: any): Observable<any> {
+        const uri = 'https://ang2-example-app.firebaseio.com/movies/' + slug + '.json';
         const body = JSON.stringify(data);
         const headers = new Headers();
 
@@ -34,19 +34,8 @@ export class DataService {
             .map(response => response.json());
     }
 
-    addData(data: any): Observable<any> {
-        const body = JSON.stringify(data);
-        const headers = new Headers();
-
-        headers.append('Content-Type', 'application/json');
-
-        return this._http.post(this._url + this._token, body, { headers: headers })
-            .map(response => response.json());
-
-    }
-
-    deleteDataSet(index: any): Observable<any> {
-        const uri = 'https://ang2-example-app.firebaseio.com/movies/' + index + '.json';
+    deleteDataSet(slug: any): Observable<any> {
+        const uri = 'https://ang2-example-app.firebaseio.com/movies/' + slug + '.json';
 
         return this._http.delete(uri + this._token)
             .map(response => response.json());
