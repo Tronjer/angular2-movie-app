@@ -46,7 +46,7 @@
 			</div>
 		</md-card-title-text>
 		<md-card-title-media hide-xs>
-			<img class="card-media md-media-lg" src="{{ movie?.poster }}">
+			<img class="card-media md-media-lg" *ngIf="movie?.img" [src]="'app/img/' +  movie?.img">
 		</md-card-title-media>
 	</md-card-title>
 	<md-card-actions layout="row" layout-align="end center">
