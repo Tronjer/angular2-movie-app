@@ -1,5 +1,5 @@
 # Angular 2 Movie App
-##### This is a Prototype App for Angular 2 (Beta), Angular Material 2 (early Beta), TypeScript and Firebase as backend.
+##### This is a Prototype App for Angular 2 (Beta), Angular Material 2 (early Beta), TypeScript and Firebase as Backend.
 It features common patterns like Registration, Login, User Auth, Route Protection, Master/Detail with nested Routes
 and CRUD operations.
 
