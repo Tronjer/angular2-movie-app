@@ -27,7 +27,7 @@
 			</ul>
 			<div layout="column">
 				<span class="md-caption edit-field">Plot:</span>
-				<textarea [(ngModel)]="movie && movie.plot"></textarea>
+				<textarea class="md-body-1" [(ngModel)]="movie && movie.plot"></textarea>
 			</div>
 			<div layout="column" class="edit-field">
 				<span class="md-caption">Critics Consensus:</span>
@@ -45,7 +45,7 @@
 				</p>
 			</div>
 		</md-card-title-text>
-		<md-card-title-media>
+		<md-card-title-media hide-xs>
 			<img class="card-media md-media-lg" src="{{ movie?.poster }}">
 		</md-card-title-media>
 	</md-card-title>
