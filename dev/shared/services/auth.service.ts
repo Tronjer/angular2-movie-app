@@ -1,6 +1,5 @@
 import {Injectable, EventEmitter} from "angular2/core";
 import {User} from "../interfaces/user.interface";
-import {error} from "util";
 declare var Firebase: any;
 
 @Injectable()
