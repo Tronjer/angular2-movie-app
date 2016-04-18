@@ -40,7 +40,16 @@ export class AppComponent implements OnInit {
     constructor(private _router: Router, private _authService: AuthService) {};
 
     ngOnInit():any {
+
+        if (this.isAuth()) {
+            this._router.navigate(['MoviesList']);
+        }
+
         return this._authService.getLoggedOutEvent()
             .subscribe( () => this._router.navigate(['Start']) );
+    }
+
+    isAuth() {
+        return this._authService.isAuthenticated();
     }
 }
