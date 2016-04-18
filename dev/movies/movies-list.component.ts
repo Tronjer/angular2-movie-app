@@ -30,21 +30,32 @@ export class MoviesListComponent implements OnInit {
 
     constructor(private _dataService: DataService, private _router: Router, public sidenav: SidenavService) {}
 
-    ngOnInit():any {
-        this.selectedMovie = 0;
-
-        return this._dataService.getAllData().subscribe(
+    fetchMovies() {
+        this._dataService.getAllData().subscribe(
             data => {
+                this.movies.length = 0;
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
                         this.movies.push(data[key]);
                     }
                 }
-                return this.movies;
+                this._router.navigate(['MovieDetails', {slug: this.movies[0].slug}]);
+                return this.movies
             },
-            error => {
-                console.log('error: ', error);
-            });
+            error => console.log(error)
+        );
+    }
+
+    ngOnInit():any {
+        this.selectedMovie = 0;
+        this._dataService.dataChanged.subscribe(
+            (event) =>  setTimeout(() => {
+                console.log('event in moviesList: ', event);
+                this.selectedMovie = 0;
+                this.fetchMovies();
+            }, 500)
+        );
+        return this.fetchMovies();
     }
 
     open() {
@@ -52,8 +63,6 @@ export class MoviesListComponent implements OnInit {
     }
 
     onSelect(index: string, slug: string) {
-        console.log('index', index);
-        console.log('slug', slug);
         this.selectedMovie = index;
         this.sidenav.hide('left');
         this._router.navigate(['MovieDetails', {slug: slug}]);

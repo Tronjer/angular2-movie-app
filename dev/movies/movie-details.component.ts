@@ -20,11 +20,7 @@ export class MovieDetailsComponent implements OnInit {
     ngOnInit():any {
         return this._dataService.getSingleData(this._slug).subscribe(
             data => {
-                    if (data === null ) {
-                        this._router.navigate(['ErrorPage'])
-                    } else {
-                        this.movie = data;
-                    }
+                this.movie = data;
             },
             error => console.log(error)
         );
@@ -35,9 +31,6 @@ export class MovieDetailsComponent implements OnInit {
     }
 
     onDelete() {
-
-        return this._dataService.deleteDataSet(this._slug).subscribe(
-           // () =>  this._router.navigate(['MovieDetails', { slug: this._slug }])
-        );
+         this._dataService.deleteDataSet(this._slug).subscribe();
     }
 }

@@ -7,8 +7,8 @@ import {Observable} from "rxjs/Observable";
 
 export class DataService {
     private _url = 'https://ang2-example-app.firebaseio.com/movies.json';
-    private _token = localStorage.getItem('token') !== null ? '?auth=' + localStorage.getItem('token') : '' ; // authentication for firebase
-    private _dataUpdated = new EventEmitter<any>();
+    private _token = localStorage.getItem('token') !== null ? '?auth=' + localStorage.getItem('token') : ''; // authentication for firebase
+    dataChanged = new EventEmitter<any>();
 
     constructor (private _http: Http) {}
 
@@ -20,8 +20,7 @@ export class DataService {
     getSingleData(slug: any): Observable<any> {
         const uri = 'https://ang2-example-app.firebaseio.com/movies/' + slug + '.json';
 
-        return this._http.get(uri + this._token)
-            .map(response => response.json());
+        return this._http.get(uri + this._token).map(response => response.json());
     }
 
     updateData(slug: any, data: any): Observable<any> {
@@ -29,19 +28,16 @@ export class DataService {
         const body = JSON.stringify(data);
         const headers = new Headers();
 
-        this._dataUpdated.emit(null);
         return this._http.put(uri + this._token, body, { headers: headers })
-            .map(response => response.json());
+            .map(response => response.json(), this.dataChanged.emit('update'));
     }
 
     deleteDataSet(slug: any): Observable<any> {
         const uri = 'https://ang2-example-app.firebaseio.com/movies/' + slug + '.json';
 
         return this._http.delete(uri + this._token)
-            .map(response => response.json());
+            .map(response => response.json(), this.dataChanged.emit('delete')
+        );
     }
 
-    getUpdateEvent(): EventEmitter<any> {
-        return this._dataUpdated;
-    }
 }

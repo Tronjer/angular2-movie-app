@@ -13,8 +13,8 @@ import {MoviesListComponent} from "./movies/movies-list.component";
 @Component({
     selector: 'movie-app',
     template: `
-            <navigation></navigation>
-          <md-content flex class="content">
+          <navigation></navigation>
+            <md-content flex class="content">
             <auth-router-outlet></auth-router-outlet>
           </md-content>
     `,
