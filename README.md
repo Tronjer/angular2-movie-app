@@ -1,4 +1,4 @@
-# Angular 2 Movie App
+# Angular 2 Movie App (deprecated)
 ##### This is a Prototype App for Angular 2 (Beta), Angular Material 2 (early Beta), TypeScript and Firebase as Backend.
 It features common patterns like Registration, Login, User Auth, Route Protection, Master/Detail with nested Routes
 and CRUD operations.
